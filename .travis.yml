@@ -1,0 +1,4 @@
+language: python
+
+install:
+  cp bot.cfg_sample bot.cfg
