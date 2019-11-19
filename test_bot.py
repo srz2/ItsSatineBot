@@ -4,7 +4,6 @@ import sys
 import os.path
 from os import path
 
-sys.path.append('../')
 import bot
 
 class TestBot(unittest.TestCase):
@@ -14,7 +13,7 @@ class TestBot(unittest.TestCase):
 		self.assertIsNotNone(msg, 'Reply message is None')
 
 	def testConfigFileExists(self):
-		exists = path.exists('../bot.cfg')
+		exists = path.exists('bot.cfg')
 		self.assertTrue(exists, 'Config file does not exist')
 
 if __name__ == '__main__':
