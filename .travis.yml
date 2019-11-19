@@ -2,3 +2,6 @@ language: python
 
 install:
   cp bot.cfg_sample bot.cfg
+
+script:
+  python test_bot.py
