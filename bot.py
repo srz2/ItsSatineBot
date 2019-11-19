@@ -29,10 +29,10 @@ def satan_exists(content):
 		return False
 
 def show_comment(comment):
-	print 'From ' + str(comment.author)
-	print 'ID:  ' + comment.id
-	print 'Parent: ' + comment.parent_id
-	print comment.body
+	print ('From ' + str(comment.author))
+	print ('ID:  ' + comment.id)
+	print ('Parent: ' + comment.parent_id)
+	print (comment.body)
 
 def bot_exists_in_parent_comments(comment):
 	# print 'Current ID:      ' + comment.id
@@ -60,13 +60,13 @@ def bot_exists_in_sibling_comments(comment):
 	return False
 
 def comment_reply_message(comment, message):
-	print 'Posting reply to ' + str(comment.id)
+	print ('Posting reply to ' + str(comment.id))
 	try:
 		new_comment = comment.reply(message)
-		print 'New Comment Posted: '  + str(new_comment)
+		print ('New Comment Posted: '  + str(new_comment))
 		return new_comment
 	except praw.exceptions.APIException as e:
-		print e
+		print (e)
 		return None
 
 def start_bot():
@@ -86,7 +86,7 @@ def start_bot():
 	                     username=username)
 
 	bot_username = str(reddit.user.me())
-	print('Running bot....' + bot_username)
+	print ('Running bot....' + bot_username)
 
 	subreddit = reddit.subreddit(subreddits_to_monitor)							# subscribe to /r/all
 	for comment in subreddit.stream.comments():									# Stream all comments
@@ -98,13 +98,13 @@ def start_bot():
 						msg = create_satine_reply_message()
 						if comment_reply_message(comment, msg) == None:			# Attempt to send message
 							seconds = reddit.auth.limits['remaining']			# If it fails, wait for x amount of seconds
-							print 'Need to sleep: ' + str(reddit.auth.limits['remaining'])  + ' seconds'
+							print ('Need to sleep: ' + str(reddit.auth.limits['remaining'])  + ' seconds')
 							now = datetime.now()
 							expire = now + timedelta(seconds=seconds)
-							print str(now.time()) + ' - Reddit Sending timeout. Sleeping for ' + str(seconds) + ' seconds. Sending at ' + str(expire.time())
+							print (str(now.time()) + ' - Reddit Sending timeout. Sleeping for ' + str(seconds) + ' seconds. Sending at ' + str(expire.time()))
 							time.sleep(seconds)
 							if comment_reply_message(comment, msg) == None:
-								print 'Failed to send reply'
+								print ('Failed to send reply')
 	# 		# 		else:
 	# 		# 			print 'Sending replies is turned off'
 	# 			else:
